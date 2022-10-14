@@ -1,0 +1,10 @@
+.popup__grid {
+  display: grid;
+  grid-template-columns: 430px 32px;
+  grid-template-rows: 32px 330px;
+  gap: 8px 8px;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
