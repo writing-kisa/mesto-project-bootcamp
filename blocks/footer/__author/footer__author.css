@@ -14,11 +14,10 @@
   }
 }
 
-@media (max-width: 320px) {
+@media screen and (max-width: 520px) {
   .footer__author {
     padding-top: 48px;
     padding-bottom: 36px;
     padding-left: 19px;
   }
 }
-

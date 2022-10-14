@@ -6,6 +6,21 @@
   font-family: "Inter", "Arial", "Helvetica", sans-serif;
 }
 
+@media (max-width: 920px) {
+  .page {
+  max-width: 720px;
+  margin-left: auto;
+  margin-right: auto;
+  }
+}
+
+@media (max-width: 724px) {
+  .page {
+  width: 100%;
+  }
+}
+
+
 @media (max-width: 320px) {
   .page {
   max-width: 320px;
