@@ -8,3 +8,9 @@
   grid-column: 1/1;
   grid-row: 2/2;
 }
+
+@media screen and (max-width: 581px) {
+  .popup__container {
+    width: 282px;
+  }
+}
