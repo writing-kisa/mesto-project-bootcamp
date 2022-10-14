@@ -3,7 +3,7 @@
   background-repeat: no-repeat;
   grid-area: button;
   background-size: contain;
-  background-color: black;
+  background-color: transparent;
   border: none;
   grid-column: 2/2;
   grid-row: 1/1;
