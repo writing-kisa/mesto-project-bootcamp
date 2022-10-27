@@ -4,9 +4,9 @@
   grid-template-rows: 32px 330px;
   gap: 8px 8px;
   position: fixed;
-  top: 50%;
+  top: 155px;
   left: 50%;
-  transform: translate(-50%, -50%);
+  transform: translate(-50%);
 }
 
 @media screen and (max-width: 581px) {

@@ -9,8 +9,9 @@
   gap: 18px;
 }
 
-@media screen and (max-width: 320px) {
+@media screen and (max-width: 581px) {
   .profile__name-button {
-    gap: 10px;
+    justify-content: center;
+    gap: 0;
   }
 }
