@@ -1,6 +1,6 @@
 .profile__button-add-photo {
   background-image: url("../../../images/vector_plus.svg");
-  background-color: black;
+  background-color: transparent;
   background-repeat: no-repeat;
   background-position: 50%;
   background-size: 22px;
