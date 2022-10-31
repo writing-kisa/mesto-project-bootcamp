@@ -112,16 +112,32 @@
       <p class="footer__author">&copy; 2022 Mesto Russia</p>
     </footer>
 
-    <div class="popup popup_opened">
+    <div class="popup">
       <div class="popup__container">
         <h2 class="popup__title">Редактировать профиль</h2>
-        <form type="name">
-          <input type="text" class="popup__text" value="Жак-Ив Кусто" />
-          <input type="text" class="popup__text" value="Исследователь океана" />
+        <form id="submit_form">
+          <input type="text" id="text-name" class="popup__text" value="Жак-Ив Кусто"/>
+          <input type="text" id="text-bio" class="popup__text" value="Исследователь океана"/>
           <button class="popup__save-button" type="submit">Сохранить</button>
         </form>
         <button class="popup__close-button" type="button"></button>
       </div>
     </div>
+
+    <div class="popup popup_type_add-card">
+      <div class="popup__container">
+        <h2 class="popup__title">Новое место</h2>
+        <form id="submit_form">
+          <input type="text" id="text-name" class="popup__text" value="Название"/>
+          <input type="text" id="text-bio" class="popup__text" value="Ссылка на картинку"/>
+          <button class="popup__save-button" type="submit">Создать</button>
+        </form>
+        <button class="popup__close-button" type="button"></button>
+      </div>
+    </div>
+
+
+
+    <script src="script.js"></script>
   </body>
 </html>
