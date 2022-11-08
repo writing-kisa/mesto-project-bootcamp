@@ -38,105 +38,101 @@
         <button class="profile__button-add-photo" type="button"></button>
       </section>
 
-      <section class="gallery">
-        <div class="gallery__cell">
-          <img
-            class="gallery__photo"
-            src="./images/grid-photo_lenskie_stolby.jpg"
-            alt="Ленские столбы в Якутии"
-          />
-          <div class="gallery__caption">
-            <h2 class="gallery__name">Ленские столбы</h2>
-            <button class="gallery__button" type="submit"></button>
-          </div>
-        </div>
-        <div class="gallery__cell">
-          <img
-            class="gallery__photo"
-            src="./images/grid-photo_dombaj.jpg"
-            alt="Домбай зимой в облаках "
-          />
-          <div class="gallery__caption">
-            <h2 class="gallery__name">Домбай</h2>
-            <button class="gallery__button" type="submit"></button>
-          </div>
-        </div>
-        <div class="gallery__cell">
-          <img
-            class="gallery__photo"
-            src="./images/grid-photo_kolskiy.jpg"
-            alt="Красивый ландшафт Кольского полуострова"
-          />
-          <div class="gallery__caption">
-            <h2 class="gallery__name">Кольский полуостров</h2>
-            <button class="gallery__button" type="submit"></button>
-          </div>
-        </div>
-        <div class="gallery__cell">
-          <img
-            class="gallery__photo"
-            src="./images/grid-photo_kamchatka.jpg"
-            alt="Черный берег Камчатки"
-          />
-          <div class="gallery__caption">
-            <h2 class="gallery__name">Камчатка</h2>
-            <button class="gallery__button" type="submit"></button>
-          </div>
-        </div>
-        <div class="gallery__cell">
-          <img
-            class="gallery__photo"
-            src="./images/grid-photo_ergaki.jpg"
-            alt="Национальный парк Ергаки"
-          />
-          <div class="gallery__caption">
-            <h2 class="gallery__name">Ергаки</h2>
-            <button class="gallery__button" type="submit"></button>
-          </div>
-        </div>
-        <div class="gallery__cell">
-          <img
-            class="gallery__photo"
-            src="./images/grid-photo_gora-elbrus.jpg"
-            alt="Снежные пики Эльбруса и зеленый цветущий луг"
-          />
-          <div class="gallery__caption">
-            <h2 class="gallery__name">Эльбрус</h2>
-            <button class="gallery__button" type="submit"></button>
-          </div>
-        </div>
-      </section>
+        <div id="card-container" class="gallery"></div>
+
     </main>
 
     <footer class="footer">
       <p class="footer__author">&copy; 2022 Mesto Russia</p>
     </footer>
 
-    <div class="popup">
+    <div id="edit_profile" class="popup popup_type_edit">
       <div class="popup__container">
         <h2 class="popup__title">Редактировать профиль</h2>
-        <form id="submit_form">
-          <input type="text" id="text-name" class="popup__text" value="Жак-Ив Кусто"/>
-          <input type="text" id="text-bio" class="popup__text" value="Исследователь океана"/>
-          <button class="popup__save-button" type="submit">Сохранить</button>
+        <form id="submit_name_form">
+          <input
+            type="text"
+            id="text-name"
+            class="popup__text"
+            value="Жак-Ив Кусто"
+          />
+          <input
+            type="text"
+            id="text-bio"
+            class="popup__text"
+            value="Исследователь океана"
+          />
+          <button
+            id="name_save_button"
+            class="popup__save-button"
+            type="submit"
+          >
+            Сохранить
+          </button>
         </form>
-        <button class="popup__close-button" type="button"></button>
+        <button
+          id="name_close_button"
+          class="popup__close-button"
+          type="button"
+        ></button>
       </div>
     </div>
 
-    <div class="popup popup_type_add-card">
+    <div id="popup_type_add-card" class="popup popup_type_add-card">
       <div class="popup__container">
         <h2 class="popup__title">Новое место</h2>
-        <form id="submit_form">
-          <input type="text" id="text-name" class="popup__text" value="Название"/>
-          <input type="text" id="text-bio" class="popup__text" value="Ссылка на картинку"/>
-          <button class="popup__save-button" type="submit">Создать</button>
+        <form id="submit_card_form">
+          <input
+            type="text"
+            id="add-card-name"
+            class="popup__text"
+            value="Название"
+          />
+          <input
+            type="text"
+            id="card-link"
+            class="popup__text"
+            value="Ссылка на картинку"
+          />
+          <button
+            id="popup__create-button"
+            class="popup__save-button"
+            type="submit"
+          >
+            Создать
+          </button>
         </form>
-        <button class="popup__close-button" type="button"></button>
+        <button
+          id="card_close_button"
+          class="popup__close-button"
+          type="button"
+        ></button>
       </div>
     </div>
 
-
+    <template id="card-template">
+      <div id="card-form" class="gallery__cell">
+        <img
+          id="card-link"
+          class="gallery__photo"
+          src="./images/grid-photo_kamchatka.jpg"
+          alt="Черный берег Камчатки"
+        />
+        <button
+        id="card__delete"
+        class="gallery__delete-button"
+        type="reset"
+      ></button>
+        <div class="gallery__caption">
+          <h2 id="gallery-card-name" class="gallery__name">Камчатка</h2>
+          <button
+            id="card__like"
+            class="gallery__like-button"
+            type="submit"
+          ></button>
+        </div>
+      </div>
+    </template>
 
     <script src="script.js"></script>
   </body>
