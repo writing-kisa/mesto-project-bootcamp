@@ -1,3 +1,5 @@
+// "use strict";
+
 const editNameButton = document.querySelector('.profile__button-change-name');
 const editNameModalWindow = document.querySelector('#edit_profile');
 const nameCloseButton = document.querySelector('#name_close_button');
@@ -13,11 +15,11 @@ const formAddCard = document.querySelector('#submit_card_form');
 
 //создаем функции, которые открывают и закрывают попап
 function openPopup(thisPopup) {
-  thisPopup.setAttribute('class', 'popup popup_opened');
+  thisPopup.classList.add('popup_opened');
 };
 
 function closePopup(thisPopup) {
-  thisPopup.setAttribute('class', 'popup');
+  thisPopup.classList.remove('popup_opened');
 };
 
 function nameChangeHandler (evt) {
@@ -77,9 +79,10 @@ const cardContainer = document.querySelector('#card-container');
 
 function createCard(cardName, cardLink) {
   const cardTemplate = document.querySelector('#card-template').content;
-  const cardElement = cardTemplate.querySelector('#card-form').cloneNode(true);
+  const cardElement = cardTemplate.querySelector('.gallery__cell').cloneNode(true);
   cardElement.querySelector('.gallery__name').textContent = cardName;
   cardElement.querySelector('.gallery__photo').src = cardLink;
+  cardElement.addEventListener('click', onCardClick);
   return cardElement;
 }
 
@@ -92,18 +95,18 @@ initialCards.forEach( card => {
   );
 });
 
-//создаем функции обработчики удаления и лайка
+//создаем функции обработчики  лайка
 //и дорабатываем функцию создания карточки, чтобы они
 //вешались на нужные DOM элементы
 
-// const deleteCardButton = document.querySelector('.gallery__delete-button');
-
-const likeCardButton = document.querySelector('.gallery__like-button');
-
-function likeOn() {
-  likeCardButton.classList.toggle('gallery__like-button_able');
+function onCardClick(event) {
+  if (event.target.classList.contains('gallery__like-button')) {
+    event.target.classList.add('gallery__like-button_able');
 }
+  if (event.target.classList.contains('gallery__delete-button')) {
+    event.currentTarget.classList.remove('gallery__cell');
+  }
+};
 
-likeCardButton.addEventListener('click', likeOn);
 
-//TO-DO доделать этот значит...
+
