@@ -75,6 +75,19 @@ const initialCards = [
 
 const cardContainer = document.querySelector('#card-container');
 
+//создаем функции обработчики  лайка
+//и дорабатываем функцию создания карточки, чтобы они
+//вешались на нужные DOM элементы
+
+function onCardClick(event) {
+  if (event.target.classList.contains('gallery__like-button')) {
+    event.target.classList.add('gallery__like-button_able');
+  }
+  if (event.target.classList.contains('gallery__delete-button')) {
+    event.currentTarget.remove();
+  }
+};
+
 //функция создания карточки
 
 function createCard(cardName, cardLink) {
@@ -95,18 +108,7 @@ initialCards.forEach( card => {
   );
 });
 
-//создаем функции обработчики  лайка
-//и дорабатываем функцию создания карточки, чтобы они
-//вешались на нужные DOM элементы
 
-function onCardClick(event) {
-  if (event.target.classList.contains('gallery__like-button')) {
-    event.target.classList.add('gallery__like-button_able');
-}
-  if (event.target.classList.contains('gallery__delete-button')) {
-    event.currentTarget.classList.remove('gallery__cell');
-  }
-};
 
 
 
