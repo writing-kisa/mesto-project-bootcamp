@@ -108,7 +108,17 @@ initialCards.forEach( card => {
   );
 });
 
+function openFullPhotoPopup(thisPopup) {
+  thisPopup.classList.add('popup-photo_opened');
+}
 
+function closeFullPhotoPopup(thisPopup) {
+  thisPopup.classList.remove('popup-photo_opened');
+};
 
+const openPhotoPopupButton = document.querySelector('.gallery__photo');
+const closePhotoPopupButton = document.querySelector('#full-photo_close_button');
+const fullPhotoModalWindow = document.querySelector('.popup-photo');
 
-
+openPhotoPopupButton.addEventListener('click', () => openFullPhotoPopup(fullPhotoModalWindow));
+closePhotoPopupButton.addEventListener('click', () => closeFullPhotoPopup(fullPhotoModalWindow));
