@@ -38,8 +38,7 @@
         <button class="profile__button-add-photo" type="button"></button>
       </section>
 
-        <div id="card-container" class="gallery"></div>
-
+      <div id="card-container" class="gallery"></div>
     </main>
 
     <footer class="footer">
@@ -110,6 +109,22 @@
       </div>
     </div>
 
+    <div class="popup-photo popup-photo_opened">
+      <figure class="popup-photo__figure">
+      <img
+        class="popup-photo__full-size"
+        src="./images/grid-photo_ergaki.jpg"
+        alt="Черный берег Камчатки"
+      />
+      <figcaption class="popup-photo__name">Ергаки</figcaption>
+    </figure>
+      <button
+        id="full-photo_close_button"
+        class="popup__close-button"
+        type="button">
+      </button>
+    </div>
+
     <template id="card-template">
       <div id="card-form" class="gallery__cell">
         <img
@@ -119,10 +134,10 @@
           alt="Черный берег Камчатки"
         />
         <button
-        id="card__delete"
-        class="gallery__delete-button"
-        type="reset"
-      ></button>
+          id="card__delete"
+          class="gallery__delete-button"
+          type="reset"
+        ></button>
         <div class="gallery__caption">
           <h2 id="gallery-card-name" class="gallery__name">Камчатка</h2>
           <button
