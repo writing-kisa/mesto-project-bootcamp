@@ -1,4 +1,4 @@
-// "use strict";
+"use strict";
 
 const editNameButton = document.querySelector('.profile__button-change-name');
 const editNameModalWindow = document.querySelector('#edit_profile');
@@ -39,11 +39,11 @@ nameCloseButton.addEventListener('click', () => closePopup(editNameModalWindow))
 
 
 // Добавляем карточку
-addCardButton.addEventListener('click', () => openPopup(addCardModalWindow)); // open popup
-createCardButton.addEventListener('click', () => closePopup(addCardModalWindow)); // close popup
+createCardButton.addEventListener('click', () => closePopup(addCardModalWindow));
 
-// formAddCard.addEventListener('submit', createCardHandler);
-cardCloseButton.addEventListener('click', () => closePopup(addCardModalWindow));
+addCardButton.addEventListener('click', () => openPopup(addCardModalWindow)); // open popup
+cardCloseButton.addEventListener('click', () => closePopup(addCardModalWindow));// close popup
+
 // submit card info
 
 const initialCards = [
@@ -96,6 +96,8 @@ function createCard(cardName, cardLink) {
   cardElement.querySelector('.gallery__name').textContent = cardName;
   cardElement.querySelector('.gallery__photo').src = cardLink;
   cardElement.addEventListener('click', onCardClick);
+  cardElement.addEventListener('click', openFullPhotoPopup);
+  // console.log(cardPhoto);
   return cardElement;
 }
 
@@ -108,17 +110,32 @@ initialCards.forEach( card => {
   );
 });
 
-function openFullPhotoPopup(thisPopup) {
-  thisPopup.classList.add('popup-photo_opened');
+//функция открытия и закрытия попапа с фотографией в полный размер
+
+const popupPhotoModalWindow = document.querySelector('.popup-photo');
+const fullPhotoCloseButton = document.querySelector('#full-photo_close_button');
+
+let cardPhotoName = document.querySelector('.popup-photo__name');
+// console.log(cardPhotoName);
+
+let cardPhotoImage = document.querySelector('.popup-photo__full-size');
+// console.log(cardPhotoImage.src);
+
+function openFullPhotoPopup(event) {
+  if (event.target.classList.contains('gallery__photo')) {
+    let popupPhotoUrl = event.target.src;
+    // console.log(popupPhotoUrl);
+    cardPhotoImage.src = popupPhotoUrl;
+    // console.log(cardPhotoImage.src);
+    let popupPhotoName = event.currentTarget.querySelector('.gallery__name');
+    cardPhotoName.textContent = popupPhotoName.textContent;
+    // console.log(popupPhotoName.textContent);
+    popupPhotoModalWindow.classList.add('popup-photo_opened');
+  }
 }
 
-function closeFullPhotoPopup(thisPopup) {
-  thisPopup.classList.remove('popup-photo_opened');
-};
+function closeFullPhotoPopup(event) {
+  event.classList.remove('popup-photo_opened');
+}
 
-const openPhotoPopupButton = document.querySelector('.gallery__photo');
-const closePhotoPopupButton = document.querySelector('#full-photo_close_button');
-const fullPhotoModalWindow = document.querySelector('.popup-photo');
-
-openPhotoPopupButton.addEventListener('click', () => openFullPhotoPopup(fullPhotoModalWindow));
-closePhotoPopupButton.addEventListener('click', () => closeFullPhotoPopup(fullPhotoModalWindow));
+fullPhotoCloseButton.addEventListener('click', () => closeFullPhotoPopup(popupPhotoModalWindow));
