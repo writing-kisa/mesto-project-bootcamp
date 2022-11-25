@@ -37,10 +37,7 @@ nameSaveButton.addEventListener('click', () => closePopup(editNameModalWindow));
 formNameChange.addEventListener('submit', nameChangeHandler);
 nameCloseButton.addEventListener('click', () => closePopup(editNameModalWindow));
 
-
 // Добавляем карточку
-createCardButton.addEventListener('click', () => closePopup(addCardModalWindow));
-
 addCardButton.addEventListener('click', () => openPopup(addCardModalWindow)); // open popup
 cardCloseButton.addEventListener('click', () => closePopup(addCardModalWindow));// close popup
 
@@ -75,9 +72,7 @@ const initialCards = [
 
 const cardContainer = document.querySelector('#card-container');
 
-//создаем функции обработчики  лайка
-//и дорабатываем функцию создания карточки, чтобы они
-//вешались на нужные DOM элементы
+//создаем функции обработчики лайка и удаления
 
 function onCardClick(event) {
   if (event.target.classList.contains('gallery__like-button')) {
@@ -100,6 +95,26 @@ function createCard(cardName, cardLink) {
   // console.log(cardPhoto);
   return cardElement;
 }
+
+//функция создания карточки через форму отправки
+
+function addNewCard(evt) {
+  evt.preventDefault();
+  const namePhotoInput = document.querySelector('#add-card-name');
+  console.log(namePhotoInput.value);
+  const linkPhotoInput = document.querySelector('#add-card-link');
+  console.log(linkPhotoInput);
+  cardContainer.prepend(
+    createCard(namePhotoInput.value, linkPhotoInput.value)
+  );
+  closePopup(addCardModalWindow);
+  namePhotoInput.value = '';
+  linkPhotoInput.value = '';
+}
+
+//
+// createCardButton <- кнопка создать карточку
+createCardButton.addEventListener('click', addNewCard);
 
 //пишем код, который из массива карточек создает и добавляет
 //карточки на страницу, используя функцию создания карточки
@@ -139,3 +154,5 @@ function closeFullPhotoPopup(event) {
 }
 
 fullPhotoCloseButton.addEventListener('click', () => closeFullPhotoPopup(popupPhotoModalWindow));
+
+
