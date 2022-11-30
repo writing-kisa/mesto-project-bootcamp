@@ -12,6 +12,11 @@ const addCardButton = document.querySelector('.profile__button-add-photo');
 const createCardButton = document.querySelector("#popup__create-button");
 const cardCloseButton = document.querySelector('#card_close_button');
 const formAddCard = document.querySelector('#submit_card_form');
+const profileName = document.querySelector('.profile__name');
+const profileBio = document.querySelector('.profile__bio');
+const cardTemplate = document.querySelector('#card-template').content;
+const namePhotoInput = document.querySelector('#add-card-name');
+const linkPhotoInput = document.querySelector('#add-card-link');
 
 //создаем функции, которые открывают и закрывают попап
 function openPopup(thisPopup) {
@@ -22,26 +27,33 @@ function closePopup(thisPopup) {
   thisPopup.classList.remove('popup_opened');
 };
 
-function nameChangeHandler (evt) {
+function handleProfileFormSubmit (evt) {
   // эта функция изменяет имя и био профиля
   evt.preventDefault();
-  const profileName = document.querySelector('.profile__name');
-  const profileBio = document.querySelector('.profile__bio');
   profileName.textContent = nameInput.value;
   profileBio.textContent = bioInput.value;
+  closePopup(editNameModalWindow);
 }
 
-// Меняем имя
+//меняем имя
 editNameButton.addEventListener('click', () => openPopup(editNameModalWindow));
-nameSaveButton.addEventListener('click', () => closePopup(editNameModalWindow));
-formNameChange.addEventListener('submit', nameChangeHandler);
-nameCloseButton.addEventListener('click', () => closePopup(editNameModalWindow));
+formNameChange.addEventListener('submit', handleProfileFormSubmit);
+// nameCloseButton.addEventListener('click', () => closePopup(editNameModalWindow));
+//--> вместо этого универсально навешиваю обработчики крестиков
 
-// Добавляем карточку
+//находим все крестики проекта по универсальному селектору
+const closeButtons = document.querySelectorAll('.popup__close-button');
+closeButtons.forEach((button) => {
+  const popup = button.closest('.popup');
+  button.addEventListener('click', () => closePopup(popup));
+});
+
+
+//добавляем карточку
 addCardButton.addEventListener('click', () => openPopup(addCardModalWindow)); // open popup
 cardCloseButton.addEventListener('click', () => closePopup(addCardModalWindow));// close popup
 
-// submit card info
+//submit card info
 
 const initialCards = [
   {
@@ -86,10 +98,11 @@ function onCardClick(event) {
 //функция создания карточки
 
 function createCard(cardName, cardLink) {
-  const cardTemplate = document.querySelector('#card-template').content;
   const cardElement = cardTemplate.querySelector('.gallery__cell').cloneNode(true);
   cardElement.querySelector('.gallery__name').textContent = cardName;
   cardElement.querySelector('.gallery__photo').src = cardLink;
+  cardElement.querySelector('.gallery__photo').alt = cardName;
+  // console.log(cardElement.querySelector('.gallery__photo').alt);
   cardElement.addEventListener('click', onCardClick);
   cardElement.addEventListener('click', openFullPhotoPopup);
   // console.log(cardPhoto);
@@ -100,21 +113,17 @@ function createCard(cardName, cardLink) {
 
 function addNewCard(evt) {
   evt.preventDefault();
-  const namePhotoInput = document.querySelector('#add-card-name');
-  console.log(namePhotoInput.value);
-  const linkPhotoInput = document.querySelector('#add-card-link');
-  console.log(linkPhotoInput);
   cardContainer.prepend(
     createCard(namePhotoInput.value, linkPhotoInput.value)
   );
   closePopup(addCardModalWindow);
-  namePhotoInput.value = '';
-  linkPhotoInput.value = '';
+  // namePhotoInput.value = '';
+  // linkPhotoInput.value = '';
+  evt.target.reset();
 }
 
-//
 // createCardButton <- кнопка создать карточку
-createCardButton.addEventListener('click', addNewCard);
+formAddCard.addEventListener('submit', addNewCard);
 
 //пишем код, который из массива карточек создает и добавляет
 //карточки на страницу, используя функцию создания карточки
@@ -129,20 +138,18 @@ initialCards.forEach( card => {
 
 const popupPhotoModalWindow = document.querySelector('.popup-photo');
 const fullPhotoCloseButton = document.querySelector('#full-photo_close_button');
-
-let cardPhotoName = document.querySelector('.popup-photo__name');
+const cardPhotoName = document.querySelector('.popup-photo__name');
 // console.log(cardPhotoName);
-
-let cardPhotoImage = document.querySelector('.popup-photo__full-size');
+const cardPhotoImage = document.querySelector('.popup-photo__full-size');
 // console.log(cardPhotoImage.src);
 
 function openFullPhotoPopup(event) {
   if (event.target.classList.contains('gallery__photo')) {
-    let popupPhotoUrl = event.target.src;
+    const popupPhotoUrl = event.target.src;
     // console.log(popupPhotoUrl);
     cardPhotoImage.src = popupPhotoUrl;
     // console.log(cardPhotoImage.src);
-    let popupPhotoName = event.currentTarget.querySelector('.gallery__name');
+    const popupPhotoName = event.currentTarget.querySelector('.gallery__name');
     cardPhotoName.textContent = popupPhotoName.textContent;
     // console.log(popupPhotoName.textContent);
     popupPhotoModalWindow.classList.add('popup-photo_opened');
