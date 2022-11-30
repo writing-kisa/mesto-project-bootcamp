@@ -137,7 +137,6 @@ initialCards.forEach( card => {
 //функция открытия и закрытия попапа с фотографией в полный размер
 
 const popupPhotoModalWindow = document.querySelector('.popup-photo');
-const fullPhotoCloseButton = document.querySelector('#full-photo_close_button');
 const cardPhotoName = document.querySelector('.popup-photo__name');
 // console.log(cardPhotoName);
 const cardPhotoImage = document.querySelector('.popup-photo__full-size');
@@ -152,7 +151,7 @@ function openFullPhotoPopup(event) {
     const popupPhotoName = event.currentTarget.querySelector('.gallery__name');
     cardPhotoName.textContent = popupPhotoName.textContent;
     // console.log(popupPhotoName.textContent);
-    popupPhotoModalWindow.classList.add('popup-photo_opened');
+    openPopup(popupPhotoModalWindow);
   }
 }
 
@@ -161,5 +160,3 @@ function closeFullPhotoPopup(event) {
 }
 
 fullPhotoCloseButton.addEventListener('click', () => closeFullPhotoPopup(popupPhotoModalWindow));
-
-
