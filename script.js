@@ -159,4 +159,36 @@ function closeFullPhotoPopup(event) {
   event.classList.remove('popup-photo_opened');
 }
 
-fullPhotoCloseButton.addEventListener('click', () => closeFullPhotoPopup(popupPhotoModalWindow));
+const formElement = document.querySelector('#submit_name_form');
+const formInput = formElement.querySelector('#text-name');
+const formError = formElement.querySelector(`.${formInput.id}-error`);
+console.log(formError);
+
+const showInputError = (element) => {
+  element.classList.add('popup__text_type_error');
+  formError.classList.add('popup__text-error_type_active');
+};
+
+//функция, которая удаляет класс с ошибкой
+const hideInputError = (element) => {
+  element.classList.remove('popup__text_type_error');
+  formError.classList.remove('popup__text-error_type_active');
+};
+
+//функция, которая проверяет валидность поля
+const isValid = () => {
+  if (!formInput.validity.valid) {
+    //если поле не проходит валидацию, покажем ошибку
+    showInputError(formInput);
+  } else {
+    //если проходит, скроем
+    hideInputError(formInput);
+  }
+};
+
+//вызовем функцию isValid на каждый ввод символа
+formInput.addEventListener('input', isValid);
+
+
+
+
