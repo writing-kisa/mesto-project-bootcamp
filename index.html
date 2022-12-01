@@ -48,33 +48,31 @@
     <div id="edit_profile" class="popup popup_type_edit">
       <div class="popup__container">
         <h2 class="popup__title">Редактировать профиль</h2>
-        <form id="submit_name_form" novalidate>
-          <input
-            type="text"
-            id="text-name"
-            class="popup__text"
-            value="Жак-Ив Кусто"
-            minlength="2"
-            maxlength="40"
-            required
-          />
-          <span
-          class="text-name-error popup__text-error">
-          Вы пропустили это поле.
-          </span>
-          <input
-            type="text"
-            id="text-bio"
-            class="popup__text"
-            value="Исследователь океана"
-            minlength="2"
-            maxlength="200"
-            required
-          />
-          <span
-          class="text-bio-error popup__text-error">
-          Вы пропустили это поле.
-          </span>
+        <form class="form" id="submit_name_form" novalidate>
+          <label class="form__field">
+            <input
+              type="text"
+              id="text-name"
+              class="popup__text"
+              value="Жак-Ив Кусто"
+              minlength="2"
+              maxlength="40"
+              required
+            />
+            <span class="text-name-error popup__text-error"></span>
+          </label>
+          <label class="form__field">
+            <input
+              type="text"
+              id="text-bio"
+              class="popup__text"
+              value="Исследователь океана"
+              minlength="2"
+              maxlength="200"
+              required
+            />
+            <span class="text-bio-error popup__text-error"></span>
+          </label>
           <button
             id="name_save_button"
             class="popup__save-button"
@@ -94,7 +92,8 @@
     <div id="popup_type_add-card" class="popup popup_type_add-card">
       <div class="popup__container">
         <h2 class="popup__title">Новое место</h2>
-        <form id="submit_card_form" novalidate>
+        <form class="form" id="submit_card_form" novalidate>
+          <label class="form__field">
           <input
             type="text"
             id="add-card-name"
@@ -104,13 +103,18 @@
             maxlength="30"
             required
           />
-          <input
+          <span class="photo-name-error popup__text-error"></span>
+          </label>
+          <label class="form__field">
+            <input
             type="url"
             id="add-card-link"
             class="popup__text"
             placeholder="Ссылка на картинку"
             required
           />
+          <span class="photo-link-error popup__text-error"></span>
+          </label>
           <button
             id="popup__create-button"
             class="popup__save-button"
@@ -129,19 +133,19 @@
 
     <div class="popup popup-photo">
       <div class="popup-photo__container">
-      <figure class="popup-photo__figure">
-        <img
-          class="popup-photo__full-size"
-          src="./images/grid-photo_ergaki.jpg"
-          alt="Национальный парк в Южной Сибири Ергаки"
-        />
-        <figcaption class="popup-photo__name">Ергаки</figcaption>
-      </figure>
-      <button
-        id="full-photo_close_button"
-        class="popup__close-button"
-        type="button"
-      ></button>
+        <figure class="popup-photo__figure">
+          <img
+            class="popup-photo__full-size"
+            src="./images/grid-photo_ergaki.jpg"
+            alt="Национальный парк в Южной Сибири Ергаки"
+          />
+          <figcaption class="popup-photo__name">Ергаки</figcaption>
+        </figure>
+        <button
+          id="full-photo_close_button"
+          class="popup__close-button"
+          type="button"
+        ></button>
       </div>
     </div>
 

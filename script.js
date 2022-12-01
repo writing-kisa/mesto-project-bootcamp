@@ -159,36 +159,55 @@ function closeFullPhotoPopup(event) {
   event.classList.remove('popup-photo_opened');
 }
 
-const formElement = document.querySelector('#submit_name_form');
-const formInput = formElement.querySelector('#text-name');
-const formError = formElement.querySelector(`.${formInput.id}-error`);
-console.log(formError);
+// ПР 7 спринта
 
-const showInputError = (element) => {
-  element.classList.add('popup__text_type_error');
-  formError.classList.add('popup__text-error_type_active');
-};
+const formElement = document.querySelector('.form__field');
+const inputElement = formElement.querySelector('.popup__text');
+// console.log(inputElement);
+const errorElement = formElement.querySelector(`.${inputElement.id}-error`);
+// console.log(errorElement);
 
-//функция, которая удаляет класс с ошибкой
-const hideInputError = (element) => {
-  element.classList.remove('popup__text_type_error');
-  formError.classList.remove('popup__text-error_type_active');
-};
 
-//функция, которая проверяет валидность поля
-const isValid = () => {
-  if (!formInput.validity.valid) {
-    //если поле не проходит валидацию, покажем ошибку
-    showInputError(formInput);
+const isValid = (formElement, inputElement) => {
+  if (!inputElement.validity.valid) {
+    showInputError(formElement, inputElement, inputElement.validationMessage);
   } else {
-    //если проходит, скроем
-    hideInputError(formInput);
+    hideInputError(formElement, inputElement);
   }
 };
 
-//вызовем функцию isValid на каждый ввод символа
-formInput.addEventListener('input', isValid);
+const showInputError = (formElement, inputElement, errorMessage) => {
+  const errorElement = formElement.querySelector(`.${inputElement.id}-error`);
+  inputElement.classList.add('popup__text_type_error');
+  errorElement.textContent = errorMessage;
+  errorElement.classList.add('popup__text-error_type_active');
+};
 
+const hideInputError = (formElement, inputElement) => {
+  const errorElement = formElement.querySelector(`.${inputElement.id}-error`);
+  inputElement.classList.remove('popup__text_type_error');
+  errorElement.classList.remove('popup__text-error_type_active');
+  errorElement.textContent = '';
+};
+
+const setEventListeners = (formElement) => {
+  const inputList = Array.from(formElement.querySelectorAll('.popup__text'));
+  inputList.forEach((inputElement) => {
+    inputElement.addEventListener('input', () => {
+      isValid(formElement, inputElement)
+    });
+  });
+};
+
+const enableValidation = () => {
+
+const formList = Array.from(document.querySelectorAll('.form'));
+  formList.forEach((formElement) => {
+    setEventListeners(formElement);
+  });
+};
+
+enableValidation();
 
 
 
