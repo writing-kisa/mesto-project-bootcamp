@@ -166,6 +166,7 @@ const inputElement = formElement.querySelector('.popup__text');
 // console.log(inputElement);
 const errorElement = formElement.querySelector(`.${inputElement.id}-error`);
 // console.log(errorElement);
+const buttonElement = document.querySelector('.popup__save-button');
 
 
 const isValid = (formElement, inputElement) => {
@@ -194,7 +195,8 @@ const setEventListeners = (formElement) => {
   const inputList = Array.from(formElement.querySelectorAll('.popup__text'));
   inputList.forEach((inputElement) => {
     inputElement.addEventListener('input', () => {
-      isValid(formElement, inputElement)
+      isValid(formElement, inputElement);
+      toggleButtonState(inputList, buttonElement);
     });
   });
 };
@@ -209,5 +211,16 @@ const formList = Array.from(document.querySelectorAll('.form'));
 
 enableValidation();
 
+const hasInvalidInput = (inputList) => {
+  return inputList.some((inputElement) => {
+    return !inputElement.validity.valid;
+  })
+};
 
-
+const toggleButtonState = (inputList, buttonElement) => {
+  if (hasInvalidInput(inputList)) {
+    buttonElement.classList.add('popup__save-button_type_inactive');
+  } else {
+    buttonElement.classList.remove('popup__save-button_type_inactive');
+  }
+};
