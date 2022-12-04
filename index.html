@@ -49,6 +49,7 @@
       <div class="popup__container">
         <h2 class="popup__title">Редактировать профиль</h2>
         <form class="form" id="submit_name_form" novalidate>
+          <fieldset class="form__set">
           <label class="form__field">
             <input
               type="text"
@@ -80,6 +81,7 @@
           >
             Сохранить
           </button>
+        </fieldset>
         </form>
         <button
           id="name_close_button"
@@ -93,7 +95,8 @@
       <div class="popup__container">
         <h2 class="popup__title">Новое место</h2>
         <form class="form" id="submit_card_form" novalidate>
-          <label class="form__field">
+          <fieldset class="form__set">
+          <label id="card-form-field" class="form__field">
           <input
             type="text"
             id="add-card-name"
@@ -103,9 +106,9 @@
             maxlength="30"
             required
           />
-          <span class="photo-name-error popup__text-error"></span>
+          <span class="add-card-name-error popup__text-error"></span>
           </label>
-          <label class="form__field">
+          <label id="card-form-field" class="form__field">
             <input
             type="url"
             id="add-card-link"
@@ -113,7 +116,7 @@
             placeholder="Ссылка на картинку"
             required
           />
-          <span class="photo-link-error popup__text-error"></span>
+          <span class="add-card-link-error popup__text-error"></span>
           </label>
           <button
             id="popup__create-button"
@@ -122,6 +125,7 @@
           >
             Создать
           </button>
+          </fieldset>
         </form>
         <button
           id="card_close_button"
