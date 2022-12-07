@@ -30,7 +30,7 @@ function closePopup(thisPopup) {
 function handleProfileFormSubmit(evt) {
   // эта функция изменяет имя и био профиля
   evt.preventDefault();
-  if (!buttonElement.classList.contains("popup__save-button_type_inactive")) {
+  if (!evt.target.classList.contains("popup__save-button_type_inactive")) {
     profileName.textContent = nameInput.value;
     profileBio.textContent = bioInput.value;
     closePopup(editNameModalWindow);
@@ -143,7 +143,7 @@ function createCard(cardName, cardLink) {
 //функция создания карточки через форму отправки
 
 function addNewCard(evt) {
-  if (!buttonElement.classList.contains("popup__save-button_type_inactive")) {
+  if (!evt.target.classList.contains("popup__save-button_type_inactive")) {
     evt.preventDefault();
     cardContainer.prepend(
       createCard(namePhotoInput.value, linkPhotoInput.value)
