@@ -45,10 +45,38 @@ formNameChange.addEventListener("submit", handleProfileFormSubmit);
 
 //находим все крестики проекта по универсальному селектору
 const closeButtons = document.querySelectorAll(".popup__close-button");
+
 closeButtons.forEach((button) => {
-  const popup = button.closest(".popup");
-  button.addEventListener("click", () => closePopup(popup));
+  const popupClosest = button.closest(".popup");
+  button.addEventListener("click", () => closePopup(popupClosest));
 });
+
+//функция закрывает попапы с помощью нажатия на esc
+
+const closeEscPopup = ()  => {
+  const popupModalWindow = Array.from(document.querySelectorAll('.popup'));
+  popupModalWindow.forEach((element) => {
+    document.addEventListener('keydown', function (evt) {
+      if (evt.key === 'Escape') {
+        closePopup(element);
+      }
+  }
+)})};
+
+closeEscPopup();
+
+//закрывает попапы с помощью нажатия на overlay
+
+const closePopupOverlay = () => {
+  const popupModalWindow = Array.from(document.querySelectorAll('.popup'));
+  popupModalWindow.forEach((element) => {
+    element.addEventListener('click', (evt) => {
+      if (evt.target === evt.currentTarget) {
+      closePopup(element);
+  }})
+})};
+
+closePopupOverlay();
 
 //добавляем карточку
 addCardButton.addEventListener("click", () => openPopup(addCardModalWindow)); // open popup
@@ -162,13 +190,6 @@ function closeFullPhotoPopup(event) {
 
 // ПР 7 спринта
 
-// const enableValidation = () => {
-//   const formList = Array.from(document.querySelectorAll('.form'));
-//     formList.forEach((formElement) => {
-//       setEventListeners(formElement);
-//     });
-//   };
-
 const showInputError = (formElement, inputElement, errorMessage) => {
   const errorElement = formElement.querySelector(`.${inputElement.id}-error`);
   inputElement.classList.add("popup__text_type_error");
@@ -208,6 +229,7 @@ const toggleButtonState = (inputList, buttonElement) => {
 const setEventListeners = (formElement) => {
   const inputList = Array.from(formElement.querySelectorAll(".popup__text"));
   const buttonElement = formElement.querySelector(".popup__save-button");
+
   toggleButtonState(inputList, buttonElement);
   inputList.forEach((inputElement) => {
     inputElement.addEventListener("input", () => {
