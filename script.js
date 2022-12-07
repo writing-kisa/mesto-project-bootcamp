@@ -18,6 +18,7 @@ const cardTemplate = document.querySelector("#card-template").content;
 const namePhotoInput = document.querySelector("#add-card-name");
 const linkPhotoInput = document.querySelector("#add-card-link");
 
+
 //создаем функции, которые открывают и закрывают попап
 function openPopup(thisPopup) {
   thisPopup.classList.add("popup_opened");
@@ -30,7 +31,7 @@ function closePopup(thisPopup) {
 function handleProfileFormSubmit(evt) {
   // эта функция изменяет имя и био профиля
   evt.preventDefault();
-  if (!evt.target.classList.contains("popup__save-button_type_inactive")) {
+  if (!nameSaveButton.classList.contains("popup__save-button_type_inactive")) {
     profileName.textContent = nameInput.value;
     profileBio.textContent = bioInput.value;
     closePopup(editNameModalWindow);
@@ -53,28 +54,31 @@ closeButtons.forEach((button) => {
 
 //функция закрывает попапы с помощью нажатия на esc
 
-const closeEscPopup = ()  => {
-  const popupModalWindow = Array.from(document.querySelectorAll('.popup'));
+const closeEscPopup = () => {
+  const popupModalWindow = Array.from(document.querySelectorAll(".popup"));
   popupModalWindow.forEach((element) => {
-    document.addEventListener('keydown', function (evt) {
-      if (evt.key === 'Escape') {
+    document.addEventListener("keydown", function (evt) {
+      if (evt.key === "Escape") {
         closePopup(element);
       }
-  }
-)})};
+    });
+  });
+};
 
 closeEscPopup();
 
 //закрывает попапы с помощью нажатия на overlay
 
 const closePopupOverlay = () => {
-  const popupModalWindow = Array.from(document.querySelectorAll('.popup'));
+  const popupModalWindow = Array.from(document.querySelectorAll(".popup"));
   popupModalWindow.forEach((element) => {
-    element.addEventListener('click', (evt) => {
+    element.addEventListener("click", (evt) => {
       if (evt.target === evt.currentTarget) {
-      closePopup(element);
-  }})
-})};
+        closePopup(element);
+      }
+    });
+  });
+};
 
 closePopupOverlay();
 
@@ -143,7 +147,7 @@ function createCard(cardName, cardLink) {
 //функция создания карточки через форму отправки
 
 function addNewCard(evt) {
-  if (!evt.target.classList.contains("popup__save-button_type_inactive")) {
+  if (!createCardButton.classList.contains("popup__save-button_type_inactive")) {
     evt.preventDefault();
     cardContainer.prepend(
       createCard(namePhotoInput.value, linkPhotoInput.value)
