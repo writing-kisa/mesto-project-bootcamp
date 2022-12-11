@@ -1,12 +1,12 @@
 // функции для работы с карточками
 
-import { openFullPhotoPopup } from "./modal.js";
-const cardContainer = document.querySelector("#card-container");
-
 //создаем функции обработчики лайка и удаления
+import {addCardModalWindow, cardContainer, createCardButton, linkPhotoInput, namePhotoInput} from "../utils/constants";
+import {closePopup, openFullPhotoPopup} from "./modal";
+
 function onCardClick(event) {
   if (event.target.classList.contains("gallery__like-button")) {
-    event.target.classList.add("gallery__like-button_able");
+    event.target.classList.toggle("gallery__like-button_able");
   }
   if (event.target.classList.contains("gallery__delete-button")) {
     event.currentTarget.remove();
@@ -14,6 +14,7 @@ function onCardClick(event) {
 }
 
 //функция создания карточки
+
 export function createCard(cardName, cardLink) {
   const cardTemplate = document.querySelector("#card-template").content;
   const cardElement = cardTemplate
@@ -22,25 +23,16 @@ export function createCard(cardName, cardLink) {
   cardElement.querySelector(".gallery__name").textContent = cardName;
   cardElement.querySelector(".gallery__photo").src = cardLink;
   cardElement.querySelector(".gallery__photo").alt = cardName;
-  // console.log(cardElement.querySelector('.gallery__photo').alt);
   cardElement.addEventListener("click", onCardClick);
   cardElement.addEventListener("click", openFullPhotoPopup);
-  // console.log(cardPhoto);
   return cardElement;
 }
 
-const createCardButton = document.querySelector("#popup__create-button");
-const namePhotoInput = document.querySelector("#add-card-name");
-const linkPhotoInput = document.querySelector("#add-card-link");
-
 export function addNewCard(evt) {
-  if (
-    !createCardButton.classList.contains("popup__save-button_type_inactive")
-  ) {
+  if (!createCardButton.classList.contains("popup__save-button_type_inactive")) {
     evt.preventDefault();
-    cardContainer.prepend(
-      createCard(namePhotoInput.value, linkPhotoInput.value)
-    );
+    const newCard = createCard(namePhotoInput.value, linkPhotoInput.value);
+    cardContainer.prepend(newCard);
     closePopup(addCardModalWindow);
     evt.target.reset();
   }
