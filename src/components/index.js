@@ -14,6 +14,7 @@ const profileName = document.querySelector(".profile__name");
 const profileBio = document.querySelector(".profile__bio");
 const cardContainer = document.querySelector("#card-container");
 
+
 const initialCards = [
   {
     name: "Архыз",
@@ -42,7 +43,7 @@ const initialCards = [
 ];
 
 import { openPopup, closePopup } from "./utils.js";
-import { closeEscPopup, closePopupOverlay, closeFullPhotoPopup, openFullPhotoPopup} from "./modal.js";
+import { closeEscPopup, closePopupOverlay } from "./modal.js";
 closeEscPopup();
 closePopupOverlay();
 
@@ -51,11 +52,12 @@ addCardButton.addEventListener("click", () => openPopup(addCardModalWindow));
 cardCloseButton.addEventListener("click", () => closePopup(addCardModalWindow));
 formNameChange.addEventListener("submit", handleProfileFormSubmit);
 
-import { addNewCard, createCard } from "./card.js";
+import { addNewCard, createCard, onCardClick } from "./card.js";
 formAddCard.addEventListener("submit", addNewCard);
 
 //пишем код, который из массива карточек создает и добавляет
 //карточки на страницу, используя функцию создания карточки
+
 initialCards.forEach((card) => {
   cardContainer.append(createCard(card.name, card.link));
 });
@@ -70,7 +72,6 @@ function handleProfileFormSubmit(evt) {
   }
 }
 
-import { enableValidation} from './validate';
+import { enableValidation } from './validate';
 enableValidation();
-
 

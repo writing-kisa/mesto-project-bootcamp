@@ -1,5 +1,8 @@
 // функции для работы с карточками
 
+import { openFullPhotoPopup } from "./modal.js";
+const cardContainer = document.querySelector("#card-container");
+
 //создаем функции обработчики лайка и удаления
 function onCardClick(event) {
   if (event.target.classList.contains("gallery__like-button")) {
@@ -9,7 +12,6 @@ function onCardClick(event) {
     event.currentTarget.remove();
   }
 }
-
 
 //функция создания карточки
 export function createCard(cardName, cardLink) {
@@ -28,7 +30,6 @@ export function createCard(cardName, cardLink) {
 }
 
 const createCardButton = document.querySelector("#popup__create-button");
-
 const namePhotoInput = document.querySelector("#add-card-name");
 const linkPhotoInput = document.querySelector("#add-card-link");
 
