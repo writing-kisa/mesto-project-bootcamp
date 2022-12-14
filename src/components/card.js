@@ -20,9 +20,10 @@ export function createCard(cardName, cardLink) {
   const cardElement = cardTemplate
     .querySelector(".gallery__cell")
     .cloneNode(true);
+  const cardPhoto = cardElement.querySelector(".gallery__photo");
   cardElement.querySelector(".gallery__name").textContent = cardName;
-  cardElement.querySelector(".gallery__photo").src = cardLink;
-  cardElement.querySelector(".gallery__photo").alt = cardName;
+  cardPhoto.src = cardLink;
+  cardPhoto.alt = cardName;
   cardElement.addEventListener("click", onCardClick);
   cardElement.addEventListener("click", openFullPhotoPopup);
   return cardElement;

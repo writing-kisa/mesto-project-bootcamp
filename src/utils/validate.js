@@ -31,8 +31,10 @@ export const hasInputValidity = (inputList) => {
 export const toggleButtonState = (inputList, buttonElement, config) => {
   if (hasInputValidity(inputList)) {
     buttonElement.classList.add(config.inactiveButtonClass);
+    // buttonElement.setAttribute("disabled", "");
   } else {
     buttonElement.classList.remove(config.inactiveButtonClass);
+    // buttonElement.removeAttribute("disabled", "");
   }
 };
 
