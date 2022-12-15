@@ -1,10 +1,14 @@
-// работа модальных окон
+const popupPhotoModalWindow = document.querySelector(".popup-photo");
+const cardPhotoImage = document.querySelector(".popup-photo__full-size");
+const popupPhotoName = document.querySelector(".popup-photo__name");
 
 export function openPopup(thisPopup) {
   thisPopup.classList.add("popup_opened");
+  document.addEventListener('keydown', closeByEscape);
 }
 export function closePopup(thisPopup) {
   thisPopup.classList.remove("popup_opened");
+  document.removeEventListener('keydown', closeByEscape);
 }
 
 //находим все крестики проекта по универсальному селектору
@@ -17,21 +21,17 @@ function setupClosePopupsByButton() {
 }
 
 //функция закрывает попапы с помощью нажатия на esc
-const setupClosePopupsByEsc = () => {
-  const popupModalWindow = Array.from(document.querySelectorAll(".popup"));
-  popupModalWindow.forEach((element) => {
-    document.addEventListener("keydown", function (evt) {
-      if (evt.key === "Escape") {
-        closePopup(element);
-      }
-    });
-  });
+const closeByEscape = (evt) => {
+  if (evt.key === 'Escape') {
+    const openedPopup = document.querySelector('.popup_opened');
+    closePopup(openedPopup);
+  }
 };
 
 //закрывает попапы с помощью нажатия на overlay
 const setupClosePopupsByClick = () => {
-  const popupModalWindow = Array.from(document.querySelectorAll(".popup"));
-  popupModalWindow.forEach((element) => {
+  const popupModalWindows = Array.from(document.querySelectorAll(".popup"));
+  popupModalWindows.forEach((element) => {
     element.addEventListener("click", (evt) => {
       if (evt.target === evt.currentTarget) {
         closePopup(element);
@@ -42,19 +42,13 @@ const setupClosePopupsByClick = () => {
 
 export function setupPopups() {
   setupClosePopupsByButton();
-  setupClosePopupsByEsc();
   setupClosePopupsByClick();
 }
 
 export function openFullPhotoPopup(event) {
-  const popupPhotoModalWindow = document.querySelector(".popup-photo");
-  const cardPhotoName = document.querySelector(".popup-photo__name");
-  const cardPhotoImage = document.querySelector(".popup-photo__full-size");
-
-  if (event.target.classList.contains("gallery__photo")) {
-    cardPhotoImage.src = event.target.src;
-    const popupPhotoName = event.currentTarget.querySelector(".gallery__name");
-    cardPhotoName.textContent = popupPhotoName.textContent;
-    openPopup(popupPhotoModalWindow);
-  }
+  const galleryCardName = event.currentTarget;
+  cardPhotoImage.src = event.target.src;
+  cardPhotoImage.alt = event.target.name;
+  popupPhotoName.textContent = galleryCardName.textContent;
+  openPopup(popupPhotoModalWindow);
 }

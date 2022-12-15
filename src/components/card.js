@@ -1,17 +1,6 @@
-// функции для работы с карточками
-
 //создаем функции обработчики лайка и удаления
-import {addCardModalWindow, cardContainer, createCardButton, linkPhotoInput, namePhotoInput} from "../utils/constants";
+import {addCardModalWindow, cardContainer, linkPhotoInput, namePhotoInput} from "../utils/constants";
 import {closePopup, openFullPhotoPopup} from "./modal";
-
-function onCardClick(event) {
-  if (event.target.classList.contains("gallery__like-button")) {
-    event.target.classList.toggle("gallery__like-button_able");
-  }
-  if (event.target.classList.contains("gallery__delete-button")) {
-    event.currentTarget.remove();
-  }
-}
 
 //функция создания карточки
 
@@ -21,20 +10,24 @@ export function createCard(cardName, cardLink) {
     .querySelector(".gallery__cell")
     .cloneNode(true);
   const cardPhoto = cardElement.querySelector(".gallery__photo");
-  cardElement.querySelector(".gallery__name").textContent = cardName;
+  const likeButton = cardElement.querySelector(".gallery__like-button");
+  const deleteButton = cardElement.querySelector(".gallery__delete-button");
+  const cardPhotoName = cardElement.querySelector(".gallery__name");
+
+  cardPhotoName.textContent = cardName;
   cardPhoto.src = cardLink;
   cardPhoto.alt = cardName;
-  cardElement.addEventListener("click", onCardClick);
-  cardElement.addEventListener("click", openFullPhotoPopup);
+
+  likeButton.addEventListener('click', () => likeButton.classList.toggle('gallery__like-button_able'));
+  deleteButton.addEventListener('click', () => cardElement.remove());
+  cardPhoto.addEventListener('click', openFullPhotoPopup);
   return cardElement;
 }
 
 export function addNewCard(evt) {
-  if (!createCardButton.classList.contains("popup__save-button_type_inactive")) {
     evt.preventDefault();
     const newCard = createCard(namePhotoInput.value, linkPhotoInput.value);
     cardContainer.prepend(newCard);
     closePopup(addCardModalWindow);
     evt.target.reset();
-  }
 }

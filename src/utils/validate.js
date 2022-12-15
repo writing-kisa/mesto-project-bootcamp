@@ -1,6 +1,9 @@
-// функциональность валидации форм
-
-export const showInputError = (formElement, inputElement, errorMessage, config) => {
+export const showInputError = (
+  formElement,
+  inputElement,
+  errorMessage,
+  config
+) => {
   const errorElement = formElement.querySelector(`.${inputElement.id}-error`);
   inputElement.classList.add(config.inputErrorClass);
   errorElement.textContent = errorMessage;
@@ -16,7 +19,12 @@ export const hideInputError = (formElement, inputElement, config) => {
 
 export const checkInputValidity = (formElement, inputElement, config) => {
   if (!inputElement.validity.valid) {
-    showInputError(formElement, inputElement, inputElement.validationMessage, config);
+    showInputError(
+      formElement,
+      inputElement,
+      inputElement.validationMessage,
+      config
+    );
   } else {
     hideInputError(formElement, inputElement, config);
   }
@@ -31,15 +39,17 @@ export const hasInputValidity = (inputList) => {
 export const toggleButtonState = (inputList, buttonElement, config) => {
   if (hasInputValidity(inputList)) {
     buttonElement.classList.add(config.inactiveButtonClass);
-    // buttonElement.setAttribute("disabled", "");
-  } else {
+    buttonElement.removeAttribute("disabled", "");
+    } else {
     buttonElement.classList.remove(config.inactiveButtonClass);
-    // buttonElement.removeAttribute("disabled", "");
+    buttonElement.setAttribute("disabled", "");
   }
 };
 
 export const setEventListeners = (formElement, config) => {
-  const inputList = Array.from(formElement.querySelectorAll(config.inputSelector));
+  const inputList = Array.from(
+    formElement.querySelectorAll(config.inputSelector)
+  );
   const buttonElement = formElement.querySelector(config.submitButtonSelector);
 
   toggleButtonState(inputList, buttonElement, config);
@@ -58,7 +68,9 @@ export const enableValidation = (config) => {
       evt.preventDefault();
     });
 
-    const fieldsetList = Array.from(formElement.querySelectorAll(config.fieldsetSelector));
+    const fieldsetList = Array.from(
+      formElement.querySelectorAll(config.fieldsetSelector)
+    );
 
     fieldsetList.forEach((fieldset) => {
       setEventListeners(fieldset, config);
