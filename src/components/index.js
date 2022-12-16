@@ -13,7 +13,6 @@ import {
   editNameModalWindow,
   formAddCard,
   formNameChange,
-  initialCards,
   nameInput,
   profileBio,
   profileName,
@@ -30,11 +29,10 @@ getUser
   profilePhoto.src = user.avatar;
 });
 
-// getCards
-// .then((card) => {
-//   = card.name;
-//   = card.link;
-// });
+getCards
+.then((cards) => { cards.forEach((card) => {
+  cardContainer.append(createCard(card.name, card.link));
+})});
 
 function handleProfileFormSubmit(evt) {
   // эта функция изменяет имя и био профиля
@@ -49,12 +47,6 @@ addCardButton.addEventListener("click", () => openPopup(addCardModalWindow, conf
 cardCloseButton.addEventListener("click", () => closePopup(addCardModalWindow));
 formNameChange.addEventListener("submit", handleProfileFormSubmit);
 formAddCard.addEventListener("submit", addNewCard);
-
-//пишем код, который из массива карточек создает и добавляет
-//карточки на страницу, используя функцию создания карточки
-initialCards.forEach((card) => {
-  cardContainer.append(createCard(card.name, card.link));
-});
 
 setupPopups();
 
