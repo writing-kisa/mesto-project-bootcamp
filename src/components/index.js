@@ -17,8 +17,24 @@ import {
   nameInput,
   profileBio,
   profileName,
+  profilePhoto,
   config
 } from "../utils/constants";
+
+import { getUser, getCards } from "../utils/api.js";
+
+getUser
+.then((user) => {
+  profileName.textContent = user.name;
+  profileBio.textContent = user.about;
+  profilePhoto.src = user.avatar;
+});
+
+// getCards
+// .then((card) => {
+//   = card.name;
+//   = card.link;
+// });
 
 function handleProfileFormSubmit(evt) {
   // эта функция изменяет имя и био профиля
