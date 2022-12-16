@@ -26,6 +26,7 @@ export function createCard(cardName, cardLink) {
 
 export function addNewCard(evt) {
     evt.preventDefault();
+    //console.log(namePhotoInput.value, linkPhotoInput.value);
     const newCard = createCard(namePhotoInput.value, linkPhotoInput.value);
     cardContainer.prepend(newCard);
     closePopup(addCardModalWindow);

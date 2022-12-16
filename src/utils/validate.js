@@ -30,19 +30,19 @@ export const checkInputValidity = (formElement, inputElement, config) => {
   }
 };
 
-export const hasInputValidity = (inputList) => {
+export const hasInvalidInput = (inputList) => {
   return inputList.some((inputElement) => {
     return !inputElement.validity.valid;
   });
 };
 
 export const toggleButtonState = (inputList, buttonElement, config) => {
-  if (hasInputValidity(inputList)) {
+  if (hasInvalidInput(inputList)) {
     buttonElement.classList.add(config.inactiveButtonClass);
-    buttonElement.removeAttribute("disabled", "");
-    } else {
-    buttonElement.classList.remove(config.inactiveButtonClass);
     buttonElement.setAttribute("disabled", "");
+  } else {
+    buttonElement.classList.remove(config.inactiveButtonClass);
+    buttonElement.removeAttribute("disabled", "");
   }
 };
 
@@ -53,13 +53,27 @@ export const setEventListeners = (formElement, config) => {
   const buttonElement = formElement.querySelector(config.submitButtonSelector);
 
   toggleButtonState(inputList, buttonElement, config);
+
   inputList.forEach((inputElement) => {
+    checkInputValidity(formElement, inputElement, config);
+
     inputElement.addEventListener("input", () => {
       checkInputValidity(formElement, inputElement, config);
       toggleButtonState(inputList, buttonElement, config);
     });
   });
 };
+
+export const checkFormValidity = (formElement, config) => {
+  const inputList = Array.from(
+    formElement.querySelectorAll(config.inputSelector)
+  );
+  const buttonElement = formElement.querySelector(config.submitButtonSelector);
+
+  inputList.forEach((inputElement) => checkInputValidity(formElement, inputElement, config));
+
+  toggleButtonState(inputList, buttonElement, config);
+}
 
 export const enableValidation = (config) => {
   const formList = Array.from(document.querySelectorAll(config.formSelector));

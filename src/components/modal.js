@@ -1,11 +1,18 @@
+import { checkFormValidity } from "../utils/validate";
+
 const popupPhotoModalWindow = document.querySelector(".popup-photo");
 const cardPhotoImage = document.querySelector(".popup-photo__full-size");
 const popupPhotoName = document.querySelector(".popup-photo__name");
 
-export function openPopup(thisPopup) {
+export function openPopup(thisPopup, config) {
   thisPopup.classList.add("popup_opened");
   document.addEventListener('keydown', closeByEscape);
+
+  const form = thisPopup.querySelector('form');
+
+  checkFormValidity(form, config);
 }
+
 export function closePopup(thisPopup) {
   thisPopup.classList.remove("popup_opened");
   document.removeEventListener('keydown', closeByEscape);

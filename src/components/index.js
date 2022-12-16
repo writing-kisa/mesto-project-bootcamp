@@ -17,6 +17,7 @@ import {
   nameInput,
   profileBio,
   profileName,
+  config
 } from "../utils/constants";
 
 function handleProfileFormSubmit(evt) {
@@ -27,8 +28,8 @@ function handleProfileFormSubmit(evt) {
   closePopup(editNameModalWindow);
 }
 
-editNameButton.addEventListener("click", () => openPopup(editNameModalWindow));
-addCardButton.addEventListener("click", () => openPopup(addCardModalWindow));
+editNameButton.addEventListener("click", () => openPopup(editNameModalWindow, config));
+addCardButton.addEventListener("click", () => openPopup(addCardModalWindow, config));
 cardCloseButton.addEventListener("click", () => closePopup(addCardModalWindow));
 formNameChange.addEventListener("submit", handleProfileFormSubmit);
 formAddCard.addEventListener("submit", addNewCard);
@@ -41,12 +42,4 @@ initialCards.forEach((card) => {
 
 setupPopups();
 
-enableValidation({
-  formSelector: ".form",
-  fieldsetSelector: ".form__set",
-  inputSelector: ".popup__text",
-  submitButtonSelector: ".popup__save-button",
-  inactiveButtonClass: "popup__save-button_type_inactive",
-  inputErrorClass: "popup__text_type_error",
-  errorClass: "popup__text-error_type_active",
-});
+enableValidation(config);
