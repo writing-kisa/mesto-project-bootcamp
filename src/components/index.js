@@ -18,11 +18,9 @@ import {
   profileName,
   profilePhoto,
   config,
-  namePhotoInput,
-  linkPhotoInput
 } from "../utils/constants";
 
-import { getUser, getCards, patchUser, postCard } from "../utils/api.js";
+import { getUser, getCards, patchUser, postNewCard } from "../utils/api.js";
 
 getUser
 .then((user) => {
@@ -56,7 +54,7 @@ addCardButton.addEventListener("click", () => openPopup(addCardModalWindow, conf
 cardCloseButton.addEventListener("click", () => closePopup(addCardModalWindow));
 formNameChange.addEventListener("submit", handleProfileFormSubmit);
 
-formAddCard.addEventListener("submit", addNewCard);
+formAddCard.addEventListener("submit", postNewCard);
 
 setupPopups();
 

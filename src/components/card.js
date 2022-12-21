@@ -1,5 +1,5 @@
 //создаем функции обработчики лайка и удаления
-import {addCardModalWindow, cardContainer, linkPhotoInput, namePhotoInput} from "../utils/constants";
+// import {addCardModalWindow, cardContainer, linkPhotoInput, namePhotoInput} from "../utils/constants";
 import {closePopup, openFullPhotoPopup} from "./modal";
 
 //функция создания карточки
@@ -24,11 +24,10 @@ export function createCard(cardName, cardLink) {
   return cardElement;
 }
 
-export function addNewCard(evt) {
-    evt.preventDefault();
-    //console.log(namePhotoInput.value, linkPhotoInput.value);
-    const newCard = createCard(namePhotoInput.value, linkPhotoInput.value);
-    cardContainer.prepend(newCard);
-    closePopup(addCardModalWindow);
-    evt.target.reset();
-}
+// export function addNewCard(evt) {
+//     evt.preventDefault();
+//     const newCard = createCard(namePhotoInput.value, linkPhotoInput.value);
+//     cardContainer.prepend(newCard);
+//     closePopup(addCardModalWindow);
+//     evt.target.reset();
+// }
