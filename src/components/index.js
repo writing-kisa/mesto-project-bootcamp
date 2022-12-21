@@ -17,10 +17,12 @@ import {
   profileBio,
   profileName,
   profilePhoto,
-  config
+  config,
+  namePhotoInput,
+  linkPhotoInput
 } from "../utils/constants";
 
-import { getUser, getCards } from "../utils/api.js";
+import { getUser, getCards, patchUser, postCard } from "../utils/api.js";
 
 getUser
 .then((user) => {
@@ -34,6 +36,13 @@ getCards
   cardContainer.append(createCard(card.name, card.link));
 })});
 
+// patchUser
+// .then((result) => {
+//   console.log(result);
+// })
+
+// postCard(namePhotoInput.value, linkPhotoInput.value);
+
 function handleProfileFormSubmit(evt) {
   // эта функция изменяет имя и био профиля
   evt.preventDefault();
@@ -46,6 +55,7 @@ editNameButton.addEventListener("click", () => openPopup(editNameModalWindow, co
 addCardButton.addEventListener("click", () => openPopup(addCardModalWindow, config));
 cardCloseButton.addEventListener("click", () => closePopup(addCardModalWindow));
 formNameChange.addEventListener("submit", handleProfileFormSubmit);
+
 formAddCard.addEventListener("submit", addNewCard);
 
 setupPopups();
