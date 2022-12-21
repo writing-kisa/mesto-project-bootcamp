@@ -19,8 +19,12 @@
 @import url(../src/blocks/gallery/__photo/gallery__photo.css);
 @import url(../src/blocks/gallery/__caption/gallery__caption.css);
 @import url(../src/blocks/gallery/__name/gallery__name.css);
+@import url(../src/blocks/gallery/__button-like-counter/gallery__button-like-counter.css);
 @import url(../src/blocks/gallery/__like-button/gallery__like-button.css);
 @import url(../src/blocks/gallery/__like-button/_able/gallery__like-button_able.css);
+@import url(../src/blocks/gallery/__like-button/_liked/gallery__like-button_liked.css);
+@import url(../src/blocks/gallery/__like-counter/_able/gallery__like-counter_able.css);
+@import url(../src/blocks/gallery/__like-counter/gallery__like-counter.css);
 @import url(../src/blocks/gallery/__delete-button/gallery__delete-button.css);
 
 @import url(../src/blocks/footer/__author/footer__author.css);
