@@ -1,7 +1,7 @@
 import "../../pages/index.css";
 
 import { closePopup, openPopup, setupPopups } from "../components/modal.js";
-import { addNewCard, createCard } from "../components/card.js";
+import { createCard } from "../components/card.js";
 import { enableValidation } from "../utils/validate";
 import {
   addCardButton,
@@ -18,6 +18,8 @@ import {
   profileName,
   profilePhoto,
   config,
+  namePhotoInput,
+  linkPhotoInput
 } from "../utils/constants";
 
 import { getUser, getCards, patchUser, postNewCard } from "../utils/api.js";
@@ -34,12 +36,10 @@ getCards
   cardContainer.append(createCard(card.name, card.link));
 })});
 
-// patchUser
-// .then((result) => {
-//   console.log(result);
-// })
-
-// postCard(namePhotoInput.value, linkPhotoInput.value);
+patchUser
+.then((result) => {
+  console.log(result);
+})
 
 function handleProfileFormSubmit(evt) {
   // эта функция изменяет имя и био профиля
@@ -54,7 +54,19 @@ addCardButton.addEventListener("click", () => openPopup(addCardModalWindow, conf
 cardCloseButton.addEventListener("click", () => closePopup(addCardModalWindow));
 formNameChange.addEventListener("submit", handleProfileFormSubmit);
 
-formAddCard.addEventListener("submit", postNewCard);
+function handleAddNewCardFromSubmit(evt) {
+  evt.preventDefault();
+
+  postNewCard(namePhotoInput.value, linkPhotoInput.value)
+    .then(card => {
+      const newCard = createCard(card.name, card.link);
+      cardContainer.prepend(newCard);
+      closePopup(addCardModalWindow);
+      formAddCard.reset();
+    });
+}
+
+formAddCard.addEventListener("submit", handleAddNewCardFromSubmit);
 
 setupPopups();
 
